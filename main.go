@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 // Функция home отображает сообщение на главной странице
@@ -17,7 +19,13 @@ func home(w http.ResponseWriter, r *http.Request) {
 
 // Функция showSnippet отображает конкретный сниппет
 func showSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Display a specific snippet..."))
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		http.NotFound(w, r)
+		return
+	}
+
+	fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
 }
 
 // Функция createSnippet создает новый сниппет
