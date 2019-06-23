@@ -19,6 +19,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 	files := []string{
 		"./ui/html/home.page.tmpl",
 		"./ui/html/base.layout.tmpl",
+		"./ui/html/footer.partial.tmpl",
 	}
 
 	// Анализирует файл HTML шаблона
@@ -35,8 +36,6 @@ func home(w http.ResponseWriter, r *http.Request) {
 		log.Println(err.Error())
 		http.Error(w, "Ineternal Server Error", 500)
 	}
-
-	w.Write([]byte("Hello from Snippetbox"))
 }
 
 // Функция showSnippet отображает конкретный сниппет
